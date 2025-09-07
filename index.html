@@ -4,11 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Evolution of Emergent Computation</title>
+    <script id="fxhash-snippet">
+      //---- do not edit the following code (you can indent as you wish)
+      let search = new URLSearchParams(window.location.search)
+      let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+      var fxhash = search.get('fxhash') || "oo" + Array(49).fill(0).map(_=>alphabet[(Math.random()*alphabet.length)|0]).join('')
+      let fxs = fxhash.split('')
+      let b58 = str=>[...str].reduce((p,c)=>p*alphabet.length+alphabet.indexOf(c)|0, 0)
+      let N = b58(fxhash.substr(2,9))
+      let s = []
+      let SL = 256
+      for (let i = 0; i < SL; i++) {
+        s[i] = i
+      }
+      for (let i = 0, j = 0; i < SL; i++) {
+        j = (j + s[i] + (N % SL)) % SL
+        ;[s[i], s[j]] = [s[j], s[i]]
+      }
+      let i = 0
+      let j = 0
+      let fxrand = () => {
+        i = (i + 1) % SL
+        j = (j + s[i]) % SL
+        ;[s[i], s[j]] = [s[j], s[i]]
+        return s[(s[i] + s[j]) % SL] / SL
+      }
+      //---- /do not edit the following code
+    </script>
   <script type="importmap">
 {
   "imports": {
     "vite": "https://aistudiocdn.com/vite@^7.1.4",
     "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.0.2",
+    "vite-plugin-singlefile": "https://aistudiocdn.com/vite-plugin-singlefile@^2.3.0",
     "react": "https://aistudiocdn.com/react@^19.1.1",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
     "react/": "https://aistudiocdn.com/react@^19.1.1/"

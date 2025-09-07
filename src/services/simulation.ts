@@ -23,14 +23,14 @@ export class CellularAutomaton {
     generateRandomRule(): Rule {
         const rule = new Array(128);
         for (let i = 0; i < 128; i++) {
-            rule[i] = Math.random() < 0.5 ? 0 : 1;
+            rule[i] = fxrand() < 0.5 ? 0 : 1;
         }
         return rule;
     }
 
     reset() {
-        const density = Math.random();
-        this.configuration = Array.from({ length: this.size }, () => (Math.random() < density ? 1 : 0));
+        const density = fxrand();
+        this.configuration = Array.from({ length: this.size }, () => (fxrand() < density ? 1 : 0));
         this.history = [this.configuration.slice()];
         this.initialDensity = this.getDensity();
         this.correctClassification = this.initialDensity > 0.5 ? 1 : 0;
@@ -166,7 +166,7 @@ export class GeneticAlgorithm {
     }
 
     generateRandomRule(): Rule {
-        return Array.from({ length: 128 }, () => (Math.random() < 0.5 ? 0 : 1));
+        return Array.from({ length: 128 }, () => (fxrand() < 0.5 ? 0 : 1));
     }
 
     evaluateFitness(rule: Rule, latticeSize: number): number {
@@ -223,7 +223,7 @@ export class GeneticAlgorithm {
         let best = null;
         let bestFitness = -1;
         for (let i = 0; i < tournamentSize; i++) {
-            const randomIndex = Math.floor(Math.random() * fitnessScores.length);
+            const randomIndex = Math.floor(fxrand() * fitnessScores.length);
             const individual = fitnessScores[randomIndex];
             if (individual.fitness > bestFitness) {
                 best = individual.rule;
@@ -234,14 +234,14 @@ export class GeneticAlgorithm {
     }
 
     crossover(parent1: Rule, parent2: Rule): Rule {
-        const crossoverPoint = Math.floor(Math.random() * 128);
+        const crossoverPoint = Math.floor(fxrand() * 128);
         const offspring = parent1.slice(0, crossoverPoint).concat(parent2.slice(crossoverPoint));
         return offspring;
     }
 
     mutate(rule: Rule) {
         for (let i = 0; i < rule.length; i++) {
-            if (Math.random() < this.mutationRate) {
+            if (fxrand() < this.mutationRate) {
                 rule[i] = 1 - rule[i];
             }
         }

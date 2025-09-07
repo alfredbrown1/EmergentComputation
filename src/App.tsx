@@ -30,6 +30,17 @@ const App: React.FC = () => {
     const [classification, setClassification] = useState<string>('-');
 
     const animationFrameRef = useRef<number | null>(null);
+    const previewCalledRef = useRef<boolean>(false);
+
+    // Effect for fxhash preview capture
+    useEffect(() => {
+        // When the CA has run for a bit and the modal is closed, take a snapshot.
+        if (caHistory.length > 50 && !showIntro && !previewCalledRef.current) {
+            fxpreview();
+            previewCalledRef.current = true; // Ensure it's only called once
+        }
+    }, [caHistory, showIntro]);
+
 
     const updateCAState = useCallback(() => {
         if (!caRef.current) return;
@@ -150,6 +161,9 @@ const App: React.FC = () => {
 
     const handleCloseIntro = () => {
         setShowIntro(false);
+        // Start with a deterministic rule for a consistent first experience
+        const ruleKey = Object.keys(PREDEFINED_RULES)[Math.floor(fxrand() * Object.keys(PREDEFINED_RULES).length)];
+        runSimulationWithRule(PREDEFINED_RULES[ruleKey] || null);
     };
 
     return (
