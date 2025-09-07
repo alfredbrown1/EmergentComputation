@@ -1,0 +1,5 @@
+{
+  "name": "Evolution of Emergent Computation",
+  "description": "An interactive React application that visualizes how genetic algorithms can discover cellular automata that perform density classification through emergent, particle-based computation. Based on the work of Crutchfield & Mitchell (1995).",
+  "requestFramePermissions": []
+}
