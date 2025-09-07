@@ -62,7 +62,6 @@ export class CellularAutomaton {
 
     step() {
         const newConfiguration = new Array(this.size);
-        const prevConfig = this.history[this.history.length - 2] || this.configuration;
         const currentConfig = this.configuration;
         
         for (let i = 0; i < this.size; i++) {
