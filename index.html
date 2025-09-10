@@ -1,16 +1,24 @@
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Evolution of Emergent Computation</title>
-
-    <script src="./src/fxhash.js"></script>
-
-    <link rel="stylesheet" href="/src/index.css" />
+  <script type="importmap">
+{
+  "imports": {
+    "vite": "https://aistudiocdn.com/vite@^7.1.4",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.0.2",
+    "vite-plugin-singlefile": "https://aistudiocdn.com/vite-plugin-singlefile@^2.3.0",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/"
+  }
+}
+</script>
 </head>
-<body>
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
-</body>
+  </body>
 </html>

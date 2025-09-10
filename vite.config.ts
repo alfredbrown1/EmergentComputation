@@ -3,6 +3,15 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // We are only using the react() plugin now
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        // Stop adding hashes to filenames
+        entryFileNames: `[name].js`,
+        chunkFileNames: `[name].js`,
+        assetFileNames: `[name].[ext]`
+      }
+    }
+  }
 })
